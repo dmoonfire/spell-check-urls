@@ -11,6 +11,9 @@
   "scripts": {
     "format": "prettier --write lib/*.js"
   },
+  "dependencies": {
+    "url-regex": "^4.1.1"
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
