@@ -1,6 +1,6 @@
 {
   "name": "spell-check-urls",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "./lib/main",
   "description": "A plugin to Atom's spell-check to mark URLs as valid words.",
   "repository": "https://github.com/dmoonfire/spell-check-urls",
