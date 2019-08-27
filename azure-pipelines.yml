@@ -15,7 +15,7 @@ steps:
     chmod u+x build-package.sh
     ./build-package.sh
 
-    apm install
+    ${HOME}/atom/usr/bin/apm-stable install
     npx commitlint --from=master to=$BUILD_SOURCEBRANCH
     npx semantic-release
 
