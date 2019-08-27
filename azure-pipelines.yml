@@ -16,8 +16,9 @@ steps:
     ./build-package.sh
 
     echo "find"
-    find -type f atom
-    ${HOME}/atom/usr/bin/apm install
+    find atom -type f
+    export PATH=${HOME}/atom/usr/bin:${PATH}
+    apm install
     npx commitlint --from=master to=$BUILD_SOURCEBRANCH
     npx semantic-release
 
