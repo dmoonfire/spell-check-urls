@@ -22,4 +22,5 @@ steps:
   env:
     GH_TOKEN: $(GH_TOKEN)
     ATOM_ACCESS_TOKEN: $(ATOM_ACCESS_TOKEN)
+    TRAVIS_OS_NAME: linux
   displayName: 'Semantic Release'
