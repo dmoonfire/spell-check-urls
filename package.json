@@ -17,8 +17,12 @@
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
+    "@semantic-release/apm": "^1.0.5",
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/git": "^7.0.16",
     "husky": "^3.0.4",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "semantic-release": "^15.13.24"
   },
   "providedServices": {
     "spell-check": {
@@ -27,10 +31,37 @@
       }
     }
   },
+  "release": {
+    "branch": "master",
+    "message": "chore(release): v${nextRelease.version}\n\n${nextRelease.notes}",
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/apm",
+      "@semantic-release/git"
+    ],
+    "analyzeCommits": [
+      "@semantic-release/commit-analyzer"
+    ],
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/apm",
+      "@semantic-release/git"
+    ],
+    "publish": [
+      "@semantic-release/apm"
+    ],
+    "success": [],
+    "fail": []
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "husky": {
     "hooks": {

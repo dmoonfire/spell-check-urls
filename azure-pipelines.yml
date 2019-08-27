@@ -1,0 +1,25 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  displayName: 'Install Node.js'
+  inputs:
+    versionSpec: '10.x'
+
+- script: |
+    curl -s -O https://raw.githubusercontent.com/atom/ci/master/build-package.sh
+    chmod u+x build-package.sh
+    ./build-package.sh
+
+    apm install
+    npx commitlint --from=master to=$BUILD_SOURCEBRANCH
+    npx semantic-release
+
+  env:
+    GH_TOKEN: $(GH_TOKEN)
+    ATOM_ACCESS_TOKEN: $(ATOM_ACCESS_TOKEN)
+  displayName: 'Semantic Release'
