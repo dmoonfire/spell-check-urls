@@ -15,8 +15,6 @@ steps:
     chmod u+x build-package.sh
     ./build-package.sh
 
-    echo "find"
-    find atom -type f
     export PATH=${HOME}/atom/usr/bin:${PATH}
     apm install
     npx commitlint --from=master to=$BUILD_SOURCEBRANCH
