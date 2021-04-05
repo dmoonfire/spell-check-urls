@@ -1,0 +1,33 @@
+name: "ci"
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+env:
+  CI: true
+
+jobs:
+  release:
+    if: |
+      !contains(github.event.head_commit.message, '[skip ci]') &&
+      github.ref == 'refs/heads/main' &&
+      github.event.repository.fork == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: install atom
+        uses: UziTech/action-setup-atom@v1
+      - name: install node
+        uses: dcodeIO/setup-node-nvm@master
+        with:
+          node-version: 'lts/*'
+      - name: install dependencies
+        run: npm ci
+      - name: release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ATOM_ACCESS_TOKEN: ${{ secrets.ATOM_ACCESS_TOKEN }}
+        run: npx semantic-release
